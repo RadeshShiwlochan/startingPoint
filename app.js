@@ -5,15 +5,16 @@ var express = require('express'),
     path = require('path'),
     MongoClient = require('mongodb').MongoClient,
     db,
+    routes = require('./app/routes'),
     app = express();
 
 const connectString = 'mongodb://localhost:27017';
-
 
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', routes);
 
 MongoClient.connect(connectString, (err, dataBase) => {
 	if(err) 
@@ -22,9 +23,9 @@ MongoClient.connect(connectString, (err, dataBase) => {
 	db = dataBase;
 });
 
-app.get('/', (req, res, next) => {
-	res.render('index');
-});
+// app.get('/', (req, res, next) => {
+// 	res.render('index');
+// });
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
