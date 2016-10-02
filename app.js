@@ -32,6 +32,14 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
 app.listen(3000, () =>{
 	console.log('listening on Port:3000');
 });    
