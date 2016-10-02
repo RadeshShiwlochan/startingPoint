@@ -24,10 +24,6 @@ MongoClient.connect(connectString, (err, dataBase) => {
 	db = dataBase;
 });
 
-// app.get('/', (req, res, next) => {
-// 	res.render('index');
-// });
-
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
